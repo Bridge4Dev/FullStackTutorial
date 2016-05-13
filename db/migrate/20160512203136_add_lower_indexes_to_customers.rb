@@ -25,4 +25,5 @@ class AddLowerIndexesToCustomers < ActiveRecord::Migration
     remove_index :customers, name: 'customers_lower_first_name'
     remove_index :customers, name: 'customers_lower_email'
   end
+  
 end

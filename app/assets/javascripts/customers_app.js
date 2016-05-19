@@ -1,5 +1,21 @@
 var app = angular.module('customers', ['ngRoute', 'ngResource', 'templates']);
 
+app.config([
+            "$routeProvider",
+  function($routeProvider) {
+
+    $routeProvider.when("/", {
+      controller: "CustomerSearchController",
+      templateUrl: "customer_search.html"
+    }).when("/:id", {
+      controller: "CustomerDetailController",
+      templateUrl: "customer_detail.html"
+    });
+  }
+]);
+
+
+
 app.controller("CustomerSearchController", [ 
             "$scope", "$http", "$location",
   function($scope, $http, $location) {
@@ -40,6 +56,8 @@ app.controller("CustomerSearchController", [
   }
 ]);
 
+
+
 app.controller("CustomerDetailController", [
           "$scope", "$routeParams", "$resource",
   function($scope, $routeParams, $resource) {
@@ -51,16 +69,11 @@ app.controller("CustomerDetailController", [
   }
 ]);
 
-app.config([
-            "$routeProvider",
-  function($routeProvider) {
-
-    $routeProvider.when("/", {
-      controller: "CustomerSearchController",
-      templateUrl: "customer_search.html"
-    }).when("/:id", {
-      controller: "CustomerDetailController",
-      templateUrl: "customer_detail.html"
-    });
+app.controller("CustomerCreditCardController", [
+          "$scope", "$resource", 
+  function($scope, $resource) {
+    var CreditCardInfo = $resource('/fake_billing.json')
+    $scope.creditCard = CreditCardInfo.get({ "cardholder_id": 1234 })
   }
 ]);
+

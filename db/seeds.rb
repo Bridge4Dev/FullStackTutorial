@@ -116,6 +116,3 @@ Customer.all.pluck(:id).each do |customer_id|
 end
 
 
-
-
-
